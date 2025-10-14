@@ -1,5 +1,6 @@
 // src/components/common/SectionWrapper.jsx
-import React, { useEffect, useState } from "react";
+import React from "react";
+import clsx from "clsx";
 
 export default function SectionWrapper({
   id,
@@ -7,26 +8,15 @@ export default function SectionWrapper({
   className = "",
   variant = "full", // 'full' or 'auto'
 }) {
-  const [navHeight, setNavHeight] = useState(0);
-
-  useEffect(() => {
-    const nav = document.querySelector("nav");
-    if (nav) setNavHeight(nav.offsetHeight);
-  }, []);
-
-  const base =
+  const baseClasses = clsx(
+    "w-full relative overflow-hidden px-4 sm:px-6 lg:px-8",
     variant === "full"
-      ? // full-screen minus navbar
-        `min-h-[calc(100vh-${navHeight}px)] flex flex-col justify-center items-center`
-      : // scrollable sections (like Contact)
-        "py-20";
+      ? "h-screen flex flex-col justify-center items-center" // ✅ always fills one screen, centered
+      : "py-16"
+  );
 
   return (
-    <section
-      id={id}
-      className={`relative w-full overflow-hidden px-4 sm:px-6 lg:px-8 ${base} ${className}`}
-      style={{ scrollMarginTop: `${navHeight}px` }} // prevents title clipping when scrolling
-    >
+    <section id={id} className={`${baseClasses} ${className}`}>
       {children}
     </section>
   );
