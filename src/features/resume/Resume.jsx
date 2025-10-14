@@ -1,125 +1,173 @@
-import React, { useEffect } from "react";
+// src/features/resume/Resume.jsx
 import { motion, useMotionValue, useTransform, animate } from "framer-motion";
+import { useEffect, useState } from "react";
 import { useTheme } from "../../context/ThemeContext";
+import SectionWrapper from "../../components/common/SectionWrapper";
 
 const COLORS = ["#13FFAA", "#1E67C6", "#CE84CF", "#DD335C"];
 
-// If your navbar is fixed and ~72px tall, set this so the title doesn't hide under it.
-const NAV_HEIGHT_PX = 72;
-
 export default function Resume() {
-  const { isDarkMode } = useTheme();
+  const { isDarkMode } = useTheme(); // 🌗 global theme state
+  const [animationError, setAnimationError] = useState(false);
   const color = useMotionValue(COLORS[0]);
 
-  // Same animated gradient as Hero
-  const bg = useTransform(color, (c) =>
-    isDarkMode
-      ? `radial-gradient(125% 125% at 50% 0%, #020617 50%, ${c})`
-      : `radial-gradient(125% 125% at 50% 0%, #ffffff 50%, ${c})`
-  );
-
+  // Safe gradient animation
   useEffect(() => {
-    const controls = animate(color, COLORS, {
-      ease: "easeInOut",
-      duration: 10,
-      repeat: Infinity,
-      repeatType: "mirror",
-    });
-    return () => controls.stop();
+    let animation;
+    try {
+      animation = animate(color, COLORS, {
+        ease: "easeInOut",
+        duration: 10,
+        repeat: Infinity,
+        repeatType: "mirror",
+      });
+    } catch (error) {
+      console.error("Animation error:", error);
+      setAnimationError(true);
+    }
+
+    return () => animation?.stop();
   }, [color]);
 
+  // Scroll to section handler
+  const scrollToSection = (id) => {
+    const element = document.getElementById(id);
+    if (element) element.scrollIntoView({ behavior: "smooth" });
+  };
+
+  if (animationError) {
+    return (
+      <SectionWrapper id="resume">
+        <h2 className="text-4xl font-bold text-center">About Me</h2>
+        <p className="text-center mt-4">
+          Animation unavailable — content loading...
+        </p>
+      </SectionWrapper>
+    );
+  }
+
   return (
-    <section id="resume" className="relative h-screen overflow-hidden">
-      {/* Animated background */}
-      <motion.div className="absolute inset-0 -z-10" style={{ background: bg }} />
+    <SectionWrapper
+      id="resume"
+      className={`min-h-screen flex flex-col justify-center ${
+        isDarkMode ? "text-white" : "text-[#06071f]"
+      }`}
+    >
+      <div className="max-w-4xl mx-auto px-4 py-20">
+        {/* Animated Gradient Title */}
+        <motion.h2
+          className="text-4xl md:text-5xl font-bold mb-5 mt-20 text-center"
+          style={{
+            backgroundImage: `linear-gradient(90deg, ${COLORS.join(", ")})`,
+            WebkitBackgroundClip: "text",
+            backgroundClip: "text",
+            color: "transparent",
+            backgroundSize: "400% 100%",
+          }}
+          animate={{
+            backgroundPosition: ["0% 50%", "100% 50%"],
+          }}
+          transition={{
+            duration: 10,
+            repeat: Infinity,
+            repeatType: "reverse",
+            ease: "linear",
+          }}
+        >
+          About Me
+        </motion.h2>
 
-      {/* Title fixed within the section (stays at top of this section) */}
-      <h1
-        className={`absolute left-1/2 -translate-x-1/2 text-4xl font-bold ${
-          isDarkMode ? "text-white" : "text-[#06071f]"
-        }`}
-        style={{ top: NAV_HEIGHT_PX + 16 }} // a bit below navbar
-      >
-        Resume
-      </h1>
+        <motion.div
+          className="h-1 w-24 mx-auto mt-2 mb-20"
+          style={{
+            background: `linear-gradient(90deg, ${COLORS.join(", ")})`,
+            backgroundSize: "400% 100%",
+          }}
+          animate={{
+            backgroundPosition: ["0% 50%", "100% 50%"],
+          }}
+          transition={{
+            duration: 10,
+            repeat: Infinity,
+            repeatType: "reverse",
+            ease: "linear",
+          }}
+        />
 
-      {/* Content area is the viewport minus the title/nav space */}
-      <div
-        className="absolute inset-x-0 flex items-center justify-center px-6"
-        style={{
-          top: NAV_HEIGHT_PX + 72, // leave room for the title area
-          bottom: 24,               // small breathing space
-        }}
-      >
-        {/* One-screen layout (no window scroll). If content ever overflows, it will clip, not push page. */}
-        <div className="w-full max-w-6xl grid gap-8">
-          {/* Intro paragraph — keep it concise so everything fits in one screen */}
-          <p
-            className={`mx-auto max-w-3xl text-center leading-relaxed text-balance ${
-              isDarkMode ? "text-gray-200" : "text-gray-800"
-            }`}
-          >
-            I am a Computer Industrial Engineering student at ENET'COM focused on
-            software engineering. I specialize in web, desktop, and mobile
-            development, with interests in DevOps and ML to build scalable
-            solutions.
-          </p>
+        {/* Description */}
+        <p
+          className={`text-lg md:text-xl text-center mb-20 max-w-2xl mx-auto ${
+            isDarkMode ? "text-gray-300" : "text-gray-700"
+          }`}
+        >
+          I am a Computer Industrial Engineering student at ENET'COM with a
+          strong passion for software engineering. I specialize in web
+          development, desktop application development, and mobile app
+          development. My experience spans creating digital solutions across
+          industrial, administrative, cultural, and agricultural sectors. I’m
+          always exploring new technologies like DevOps and machine learning to
+          build smarter, scalable solutions.
+        </p>
 
-          {/* Cards row — three boxes fit a single row on md+ */}
-          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
-            <Card
-              title="Technologies"
-              accent="#13FFAA"
-              items={[
-                "React • Node • Express",
-                "MongoDB • PostgreSQL",
-                "Docker • CI/CD",
-              ]}
-              dark={isDarkMode}
-            />
-            <Card
-              title="Projects"
-              accent="#1E67C6"
-              items={[
-                "Full-stack apps",
-                "APIs & dashboards",
-                "Mobile (React Native)",
-              ]}
-              dark={isDarkMode}
-            />
-            <Card
-              title="Study"
-              accent="#CE84CF"
-              items={[
-                "Algorithms & DS",
-                "OOP • Systems",
-                "AI/ML basics",
-              ]}
-              dark={isDarkMode}
-            />
-          </div>
+        {/* Three Rectangles */}
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+          <AnimatedButton
+            title="Technologies"
+            description="Tools I master and the tech I explore — from front-end frameworks to DevOps pipelines."
+            color={color}
+            onClick={() => scrollToSection("technologies")}
+            isDarkMode={isDarkMode}
+          />
+
+          <AnimatedButton
+            title="Projects"
+            description="Real-world challenges turned into digital solutions across industries — take a look!"
+            color={color}
+            onClick={() => scrollToSection("projects")}
+            isDarkMode={isDarkMode}
+          />
+
+          <AnimatedButton
+            title="Study"
+            description="Here’s how my education powers my code."
+            color={color}
+            onClick={() => scrollToSection("study")}
+            isDarkMode={isDarkMode}
+          />
         </div>
       </div>
-    </section>
+    </SectionWrapper>
   );
 }
 
-function Card({ title, items, accent, dark }) {
+// 🟣 Animated Button (with dark/light adaptation)
+function AnimatedButton({ title, description, color, onClick, isDarkMode }) {
+  const borderColor = useTransform(color, (c) => c || "#13FFAA");
+  const boxShadow = useTransform(color, (c) => `0px 4px 24px ${c || "#13FFAA"}`);
+
   return (
-    <div
-      className={`rounded-2xl p-6 shadow-xl border ${
-        dark ? "bg-[#0b1120] text-white border-white/10" : "bg-gray-100 text-[#06071f] border-black/10"
+    <motion.button
+      onClick={onClick}
+      className={`flex flex-col items-center justify-center h-32 w-48 mx-auto p-4 rounded-xl font-semibold text-center transform-gpu transition-all duration-300 ease-in-out hover:-translate-y-1 hover:scale-105 focus:outline-none ${
+        isDarkMode
+          ? "text-white bg-[#020617]/60"
+          : "text-[#06071f] bg-gray-100"
       }`}
-      style={{ boxShadow: `0 10px 30px ${accent}33` }}
+      style={{
+        borderColor,
+        borderWidth: "1px",
+        borderStyle: "solid",
+        boxShadow,
+      }}
     >
-      <h3 className="text-xl font-semibold mb-3" style={{ color: accent }}>
-        {title}
-      </h3>
-      <ul className="space-y-2 text-sm opacity-90">
-        {items.map((t, i) => (
-          <li key={i}>• {t}</li>
-        ))}
-      </ul>
-    </div>
+      <span className="text-lg mb-1">{title}</span>
+      <span
+        className={`text-xs ${
+          isDarkMode ? "text-gray-300" : "text-gray-600"
+        }`}
+      >
+        {description}
+      </span>
+    </motion.button>
   );
 }
