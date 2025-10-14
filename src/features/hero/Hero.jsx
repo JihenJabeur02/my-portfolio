@@ -2,6 +2,8 @@ import React, { useEffect } from "react";
 import { motion, useMotionValue, useTransform, animate } from "framer-motion";
 import { Stars } from "@react-three/drei";
 import { Canvas } from "@react-three/fiber";
+import { FaGithub, FaLinkedin } from "react-icons/fa";
+import { FiMail } from "react-icons/fi";
 import jihenjabeur from "../../assets/images/JihenJabeur.png";
 import { useTheme } from "../../context/ThemeContext"; // ✅ global theme
 import SectionWrapper from "../../components/common/SectionWrapper"; // ✅ wrapper component
@@ -38,7 +40,7 @@ export default function Hero() {
   return (
 <SectionWrapper
   id="home"
-  className="relative flex flex-col items-center justify-center overflow-hidden h-screen pt-32 sm:pt-36"
+  className="relative flex flex-col items-center justify-center overflow-hidden h-screen pt-32 sm:pt-28"
   variant="static"
 >
   <motion.div className="absolute inset-0 z-0" style={{ background: updateBackground }} />
