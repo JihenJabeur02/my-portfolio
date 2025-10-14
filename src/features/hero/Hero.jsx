@@ -38,43 +38,68 @@ export default function Hero() {
   };
 
   return (
-<SectionWrapper
-  id="home"
-  className="relative flex flex-col items-center justify-center overflow-hidden h-screen pt-24 sm:pt-28"
-  variant="static"
->
-  <motion.div className="absolute inset-0 z-0" style={{ background: updateBackground }} />
+    <SectionWrapper
+      id="home"
+      className="relative flex flex-col items-center justify-center overflow-hidden h-screen"
+      variant="static"
+    >
+      {/* Dynamic gradient background */}
+      <motion.div
+        className="absolute inset-0 z-0"
+        style={{ background: updateBackground }}
+      />
 
-  {isDarkMode && (
-    <div className="absolute inset-0 z-0">
-      <Canvas style={{ pointerEvents: "none" }}>
-        <Stars radius={100} count={3000} factor={4} fade speed={0.5} />
-      </Canvas>
-    </div>
-  )}
+      {/* Stars only visible in dark mode */}
+      {isDarkMode && (
+        <div className="absolute inset-0 z-0">
+          <Canvas style={{ pointerEvents: "none" }}>
+            <Stars radius={100} count={3000} factor={4} fade speed={0.5} />
+          </Canvas>
+        </div>
+      )}
 
-  <div className="relative z-10 flex flex-col items-center text-center px-2">
-    <div className="relative w-full flex justify-center mb-8">
-      <CircularImage color={color} />
-    </div>
+      {/* Hero content */}
+      <div className="relative z-10 flex flex-col items-center text-center px-2 py-25">
+        {/* Profile image */}
+        <div className="relative w-full flex justify-center mb-8">
+          <CircularImage color={color} />
+        </div>
 
-    <div className="mb-10">
-      <h1 className="text-4xl sm:text-5xl md:text-6xl font-bold mb-4">
-        Hi, I'm Jihen Jabeur
-      </h1>
-      <p className="text-base sm:text-lg md:text-xl max-w-2xl mx-auto">
-        Full-Stack Developer | DevOps-Minded
-      </p>
-    </div>
+        {/* Texts */}
+        <div className="mb-10">
+          <h1 className="text-4xl sm:text-5xl md:text-6xl font-bold mb-4">
+            Hi, I'm Jihen Jabeur
+          </h1>
+          <p className="text-base sm:text-lg md:text-xl max-w-2xl mx-auto">
+            Full-Stack Developer | DevOps-Minded
+          </p>
+        </div>
 
-    <AnimatedButton color={color} scrollToSection={scrollToSection} />
+        {/* Contact button */}
+        <AnimatedButton color={color} scrollToSection={scrollToSection} />
 
-    <div className="mt-16 flex justify-center gap-12 sm:gap-15">
-      {/* icons */}
-    </div>
-  </div>
-</SectionWrapper>
-
+        {/* Social icons */}
+        <div className="mt-16 flex justify-center gap-12 sm:gap-15">
+          {[
+            { Icon: FaGithub, href: "https://github.com/JihenJabeur02" },
+            { Icon: FaLinkedin, href: "https://www.linkedin.com/in/jihen-jabeur-1170702a2/" },
+            { Icon: FiMail, href: "mailto:jihenjabeur7@gmail.com" },
+          ].map(({ Icon, href }, i) => (
+            <a
+              key={i}
+              href={href}
+              target="_blank"
+              rel="noopener noreferrer"
+              className={`text-2xl sm:text-3xl transition-transform duration-300 hover:scale-125 ${
+                isDarkMode ? "text-white" : "text-[#06071f]"
+              }`}
+            >
+              <Icon />
+            </a>
+          ))}
+        </div>
+      </div>
+    </SectionWrapper>
   );
 }
 
