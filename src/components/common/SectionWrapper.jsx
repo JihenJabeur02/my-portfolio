@@ -1,57 +1,24 @@
+// src/components/common/SectionWrapper.jsx
 import React from "react";
-import { motion } from "framer-motion";
-import { useTheme } from "../../context/ThemeContext";
+import clsx from "clsx";
 
-/**
- * SectionWrapper: a reusable container for each section that
- * automatically applies light/dark backgrounds and text colors.
- *
- * Props:
- *  - children: React nodes (the content inside the section)
- *  - id: optional HTML id for scroll targeting
- *  - className: optional Tailwind utility classes
- *  - variant: "default" (animated) or "static"
- */
 export default function SectionWrapper({
-  children,
   id,
+  children,
   className = "",
-  variant = "default",
+  variant = "full", // 'full' or 'auto'
 }) {
-  const { isDarkMode } = useTheme();
+  // Standard height and top padding for all sections
+  const baseClasses = clsx(
+    "w-full relative overflow-hidden px-4 sm:px-6 lg:px-8",
+    variant === "full"
+      ? "min-h-[calc(100vh-80px)] pt-24 pb-8 flex flex-col items-center"
+      : "py-16"
+  );
 
-  const backgroundColor = isDarkMode ? "#020617" : "#ffffff";
-  const textColor = isDarkMode ? "white" : "#06071f";
-
-  const sectionClasses = `
-    relative min-h-screen w-full px-4 sm:px-8 py-16 sm:py-24
-    transition-colors duration-500
-    ${className}
-  `;
-
-  if (variant === "static") {
-    return (
-      <section
-        id={id}
-        className={sectionClasses}
-        style={{ backgroundColor, color: textColor }}
-      >
-        {children}
-      </section>
-    );
-  }
-
-  // With fade-in animation
   return (
-    <motion.section
-      id={id}
-      initial={{ opacity: 0, y: 30 }}
-      animate={{ opacity: 1, y: 0 }}
-      transition={{ duration: 0.8 }}
-      className={sectionClasses}
-      style={{ backgroundColor, color: textColor }}
-    >
+    <section id={id} className={`${baseClasses} ${className}`}>
       {children}
-    </motion.section>
+    </section>
   );
 }
