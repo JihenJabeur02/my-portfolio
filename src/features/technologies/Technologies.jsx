@@ -59,51 +59,52 @@ export default function Technologies() {
   }
 
   return (
-    <SectionWrapper
-      id="technologies"
-      className={`min-h-screen ${
+  <SectionWrapper
+    id="technologies"
+    className={`relative flex flex-col items-center h-[calc(100vh-80px)] overflow-hidden pt-24 ${
+      isDarkMode ? "text-white" : "text-[#06071f]"
+    }`}
+    variant="static"
+  >
+    {/* Title */}
+    <motion.h2
+      className="text-4xl md:text-5xl font-bold text-center mb-8"
+      style={{
+        backgroundImage: `linear-gradient(90deg, ${COLORS.join(", ")})`,
+        WebkitBackgroundClip: "text",
+        backgroundClip: "text",
+        color: "transparent",
+        backgroundSize: "400% 100%",
+      }}
+      animate={{
+        backgroundPosition: ["0% 50%", "100% 50%"],
+      }}
+      transition={{
+        duration: 10,
+        repeat: Infinity,
+        repeatType: "reverse",
+        ease: "linear",
+      }}
+    >
+      Technologies
+    </motion.h2>
+
+    {/* Technologies Grid */}
+    <div
+      className={`grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-6 sm:gap-8 max-w-5xl mx-auto ${
         isDarkMode ? "text-white" : "text-[#06071f]"
       }`}
     >
-      {/* Title */}
-      <motion.h2
-        className="text-4xl md:text-5xl font-bold text-center mb-4 mt-20"
-        style={{
-          backgroundImage: `linear-gradient(90deg, ${COLORS.join(", ")})`,
-          WebkitBackgroundClip: "text",
-          backgroundClip: "text",
-          color: "transparent",
-          backgroundSize: "400% 100%",
-        }}
-        animate={{
-          backgroundPosition: ["0% 50%", "100% 50%"],
-        }}
-        transition={{
-          duration: 10,
-          repeat: Infinity,
-          repeatType: "reverse",
-          ease: "linear",
-        }}
-      >
-        Technologies
-      </motion.h2>
-
-      {/* Technologies Grid */}
-      <div
-        className={`grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-10 max-w-6xl mt-20 mx-auto ${
-          isDarkMode ? "text-white" : "text-[#06071f]"
-        }`}
-      >
-        {technologies.map((tech, index) => (
-          <TechnologyBox
-            key={index}
-            tech={tech}
-            color={color}
-            isDarkMode={isDarkMode}
-          />
-        ))}
-      </div>
-    </SectionWrapper>
+      {technologies.map((tech, index) => (
+        <TechnologyBox
+          key={index}
+          tech={tech}
+          color={color}
+          isDarkMode={isDarkMode}
+        />
+      ))}
+    </div>
+  </SectionWrapper>
   );
 }
 
