@@ -40,7 +40,7 @@ export default function Hero() {
   return (
     <SectionWrapper
       id="home"
-      className="relative flex flex-col items-center justify-center overflow-hidden h-screen"
+      className="relative grid place-content-center overflow-hidden"
       variant="static"
     >
       {/* Dynamic gradient background */}
@@ -59,15 +59,15 @@ export default function Hero() {
       )}
 
       {/* Hero content */}
-      <div className="relative z-10 flex flex-col items-center text-center px-2 py-25">
+      <div className="relative z-10 flex flex-col items-center text-center px-4 py-20">
         {/* Profile image */}
-        <div className="relative w-full flex justify-center mb-8">
+        <div className="relative w-full flex justify-center mb-10">
           <CircularImage color={color} />
         </div>
 
         {/* Texts */}
         <div className="mb-10">
-          <h1 className="text-4xl sm:text-5xl md:text-6xl font-bold mb-4">
+          <h1 className="text-4xl sm:text-5xl md:text-6xl font-bold mb-6">
             Hi, I'm Jihen Jabeur
           </h1>
           <p className="text-base sm:text-lg md:text-xl max-w-2xl mx-auto">
@@ -79,7 +79,7 @@ export default function Hero() {
         <AnimatedButton color={color} scrollToSection={scrollToSection} />
 
         {/* Social icons */}
-        <div className="mt-16 flex justify-center gap-12 sm:gap-15">
+        <div className="mt-16 flex justify-center gap-12 sm:gap-20">
           {[
             { Icon: FaGithub, href: "https://github.com/JihenJabeur02" },
             { Icon: FaLinkedin, href: "https://www.linkedin.com/in/jihen-jabeur-1170702a2/" },
