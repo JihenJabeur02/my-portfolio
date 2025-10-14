@@ -59,8 +59,9 @@ export default function ContactPage() {
   variant="auto"
   className={`${isDarkMode ? "text-white" : "text-[#06071f]"}`}
 >
-  {/* content */}
+  {/* your form */}
 </SectionWrapper>
+
 
   );
 }

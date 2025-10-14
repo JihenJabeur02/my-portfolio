@@ -52,69 +52,61 @@ export default function Study() {
     return () => animation?.stop();
   }, [color]);
 
-  return (
-    <SectionWrapper
-      id="study"
-      variant="full"
-      className={`${isDarkMode ? "text-white" : "text-[#06071f]"}`}
-    >
-      <div className="max-w-5xl mx-auto w-full">
-        {/* Title */}
-        <motion.h2
-          className="text-4xl md:text-5xl font-bold mb-12 text-center"
-          style={{
-            backgroundImage: `linear-gradient(90deg, ${COLORS.join(", ")})`,
-            WebkitBackgroundClip: "text",
-            color: "transparent",
-            backgroundSize: "400% 100%",
-          }}
-          animate={{
-            backgroundPosition: ["0% 50%", "100% 50%"],
-          }}
-          transition={{
-            duration: 10,
-            repeat: Infinity,
-            repeatType: "reverse",
-            ease: "linear",
-          }}
-        >
-          About My Study
-        </motion.h2>
+return (
+  <SectionWrapper
+    id="study"
+    variant="full"
+    className={`${isDarkMode ? "text-white" : "text-[#06071f]"}`}
+  >
+    <div className="text-center max-w-5xl">
+      <motion.h2
+        className="text-4xl md:text-5xl font-bold mb-8"
+        style={{
+          backgroundImage: `linear-gradient(90deg, ${COLORS.join(", ")})`,
+          WebkitBackgroundClip: "text",
+          color: "transparent",
+          backgroundSize: "400% 100%",
+        }}
+        animate={{ backgroundPosition: ["0% 50%", "100% 50%"] }}
+        transition={{
+          duration: 10,
+          repeat: Infinity,
+          repeatType: "reverse",
+          ease: "linear",
+        }}
+      >
+        Study Path
+      </motion.h2>
 
-        {/* Timeline */}
-        <div className="flex flex-col gap-8">
-          {studies.map((item, idx) => (
-            <motion.div
-              key={idx}
-              initial={{ opacity: 0, y: 40 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.8, delay: idx * 0.2 }}
-              viewport={{ once: true }}
-              className={`flex flex-col md:flex-row justify-between items-start md:items-center border-b pb-4 ${
-                isDarkMode ? "border-gray-700" : "border-gray-300"
+      <div className="space-y-4">
+        {studies.map((item, i) => (
+          <motion.div
+            key={i}
+            whileHover={{ scale: 1.02 }}
+            className={`border rounded-lg p-4 ${
+              isDarkMode ? "border-gray-700" : "border-gray-300"
+            }`}
+          >
+            <h3 className="font-bold text-lg">{item.title}</h3>
+            <p
+              className={`text-sm ${
+                isDarkMode ? "text-gray-400" : "text-gray-600"
               }`}
             >
-              <div>
-                <h3 className="text-xl font-bold">{item.title}</h3>
-                <p
-                  className={`text-sm ${
-                    isDarkMode ? "text-gray-400" : "text-gray-600"
-                  }`}
-                >
-                  {item.school}
-                </p>
-              </div>
-              <span
-                className={`text-lg font-semibold mt-2 md:mt-0 ${
-                  isDarkMode ? "text-pink-400" : "text-pink-600"
-                }`}
-              >
-                {item.period}
-              </span>
-            </motion.div>
-          ))}
-        </div>
+              {item.school}
+            </p>
+            <span
+              className={`block mt-1 text-sm ${
+                isDarkMode ? "text-pink-400" : "text-pink-600"
+              }`}
+            >
+              {item.period}
+            </span>
+          </motion.div>
+        ))}
       </div>
-    </SectionWrapper>
-  );
+    </div>
+  </SectionWrapper>
+);
+
 }

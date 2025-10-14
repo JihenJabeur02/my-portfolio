@@ -58,16 +58,46 @@ export default function Technologies() {
     );
   }
 
-  return (
-<SectionWrapper
-  id="technologies"
-  variant="full"
-  className={`${isDarkMode ? "text-white" : "text-[#06071f]"}`}
->
-  {/* content */}
-</SectionWrapper>
+return (
+  <SectionWrapper
+    id="technologies"
+    variant="full"
+    className={`${isDarkMode ? "text-white" : "text-[#06071f]"}`}
+  >
+    <div className="text-center max-w-5xl">
+      <motion.h2
+        className="text-4xl md:text-5xl font-bold mb-8"
+        style={{
+          backgroundImage: `linear-gradient(90deg, ${COLORS.join(", ")})`,
+          WebkitBackgroundClip: "text",
+          color: "transparent",
+          backgroundSize: "400% 100%",
+        }}
+        animate={{ backgroundPosition: ["0% 50%", "100% 50%"] }}
+        transition={{
+          duration: 10,
+          repeat: Infinity,
+          repeatType: "reverse",
+          ease: "linear",
+        }}
+      >
+        Technologies
+      </motion.h2>
 
-  );
+      <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-6 justify-items-center">
+        {technologies.map((tech, i) => (
+          <TechnologyBox
+            key={i}
+            tech={tech}
+            color={color}
+            isDarkMode={isDarkMode}
+          />
+        ))}
+      </div>
+    </div>
+  </SectionWrapper>
+);
+
 }
 
 // 🟣 Technology Card Box

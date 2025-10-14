@@ -46,16 +46,68 @@ export default function Resume() {
     );
   }
 
-  return (
-<SectionWrapper
-  id="resume"
-  variant="full"
-  className={`${isDarkMode ? "text-white" : "text-[#06071f]"}`}
->
-  {/* content */}
-</SectionWrapper>
+return (
+  <SectionWrapper
+    id="resume"
+    variant="full"
+    className={`${isDarkMode ? "text-white" : "text-[#06071f]"}`}
+  >
+    <div className="text-center max-w-3xl">
+      <motion.h2
+        className="text-4xl md:text-5xl font-bold mb-6"
+        style={{
+          backgroundImage: `linear-gradient(90deg, ${COLORS.join(", ")})`,
+          WebkitBackgroundClip: "text",
+          color: "transparent",
+          backgroundSize: "400% 100%",
+        }}
+        animate={{ backgroundPosition: ["0% 50%", "100% 50%"] }}
+        transition={{
+          duration: 10,
+          repeat: Infinity,
+          repeatType: "reverse",
+          ease: "linear",
+        }}
+      >
+        About Me
+      </motion.h2>
 
-  );
+      <p
+        className={`text-lg sm:text-xl mb-8 ${
+          isDarkMode ? "text-gray-300" : "text-gray-700"
+        }`}
+      >
+        I’m a Computer Industrial Engineering student passionate about
+        full-stack development and DevOps.
+      </p>
+
+      <div className="flex justify-center gap-6 flex-wrap">
+        <AnimatedButton
+          title="Technologies"
+          description="Explore my tools and stacks"
+          color={color}
+          isDarkMode={isDarkMode}
+          onClick={() => scrollToSection("technologies")}
+        />
+        <AnimatedButton
+          title="Projects"
+          description="Discover my real-world work"
+          color={color}
+          isDarkMode={isDarkMode}
+          onClick={() => scrollToSection("projects")}
+        />
+        <AnimatedButton
+          title="Study"
+          description="See my educational path"
+          color={color}
+          isDarkMode={isDarkMode}
+          onClick={() => scrollToSection("study")}
+        />
+      </div>
+    </div>
+  </SectionWrapper>
+);
+
 }
 
 // 🟣 Animated Button (with dark/light adaptation)
