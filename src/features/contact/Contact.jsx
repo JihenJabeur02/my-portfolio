@@ -54,15 +54,116 @@ export default function ContactPage() {
   };
 
   return (
-<SectionWrapper
-  id="contact"
-  variant="auto"
-  className={`${isDarkMode ? "text-white" : "text-[#06071f]"}`}
->
-  {/* your form */}
-</SectionWrapper>
+    <SectionWrapper
+      id="contact"
+      className={`flex justify-center items-center min-h-screen ${
+        isDarkMode ? "text-white" : "text-[#06071f]"
+      }`}
+    >
+      {/* Outer Animated Border */}
+      <motion.div
+        animate={{
+          backgroundPosition: ["0% 50%", "100% 50%", "0% 50%"],
+        }}
+        transition={{
+          duration: 20,
+          ease: "linear",
+          repeat: Infinity,
+        }}
+        style={{
+          background: "linear-gradient(270deg, #DD335C, #1E67C6, #13FFAA, #DD335C)",
+          backgroundSize: "600% 600%",
+          padding: "4px",
+          borderRadius: "1.5rem",
+          width: "100%",
+          maxWidth: "600px",
+        }}
+      >
+        {/* Inner Box */}
+        <div
+          className={`rounded-3xl p-10 ${
+            isDarkMode
+              ? "bg-[#020617]/70 backdrop-blur-md"
+              : "bg-white/70 backdrop-blur-md"
+          }`}
+        >
+          {/* Title */}
+          <h2
+            className={`text-4xl font-extrabold text-center mb-6 ${
+              isDarkMode ? "text-white" : "text-[#06071f]"
+            }`}
+          >
+            Contact Me
+          </h2>
 
+          {/* Status Message */}
+          {status.msg && (
+            <div
+              className={`mb-4 p-3 rounded-md border text-center ${
+                status.ok
+                  ? isDarkMode
+                    ? "border-green-400 bg-green-800/20 text-green-300"
+                    : "border-green-500 bg-green-100 text-green-800"
+                  : isDarkMode
+                  ? "border-red-400 bg-red-800/20 text-red-300"
+                  : "border-red-500 bg-red-100 text-red-800"
+              }`}
+            >
+              {status.msg}
+            </div>
+          )}
 
+          {/* Contact Form */}
+          <form
+            ref={formRef}
+            onSubmit={handleSubmit}
+            className="flex flex-col gap-6"
+          >
+            <InputField
+              type="text"
+              name="user_name"
+              placeholder="Your Name"
+              required
+              isDarkMode={isDarkMode}
+            />
+            <InputField
+              type="email"
+              name="reply_to"
+              placeholder="Your Email"
+              required
+              isDarkMode={isDarkMode}
+            />
+            <TextArea
+              name="message"
+              placeholder="What do you want to say?"
+              required
+              isDarkMode={isDarkMode}
+            />
+
+            <motion.button
+              type="submit"
+              whileHover={{
+                scale: status.sending ? 1 : 1.05,
+                y: status.sending ? 0 : -3,
+              }}
+              whileTap={{ scale: status.sending ? 1 : 0.98 }}
+              disabled={status.sending}
+              className={`py-3 rounded-full font-semibold transition-all ${
+                isDarkMode
+                  ? "bg-[#020617]/60 text-white border border-white hover:shadow-[0_0_15px_#fff]"
+                  : "bg-[#f3f4f6] text-[#06071f] border border-gray-400 hover:shadow-[0_0_10px_#aaa]"
+              }`}
+              style={{
+                cursor: status.sending ? "not-allowed" : "pointer",
+                opacity: status.sending ? 0.7 : 1,
+              }}
+            >
+              {status.sending ? "Sending..." : "Send Message"}
+            </motion.button>
+          </form>
+        </div>
+      </motion.div>
+    </SectionWrapper>
   );
 }
 

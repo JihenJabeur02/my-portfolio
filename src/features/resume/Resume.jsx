@@ -46,68 +46,98 @@ export default function Resume() {
     );
   }
 
-return (
-  <SectionWrapper
-    id="resume"
-    variant="full"
-    className={`${isDarkMode ? "text-white" : "text-[#06071f]"}`}
-  >
-    <div className="text-center max-w-3xl">
-      <motion.h2
-        className="text-4xl md:text-5xl font-bold mb-6"
-        style={{
-          backgroundImage: `linear-gradient(90deg, ${COLORS.join(", ")})`,
-          WebkitBackgroundClip: "text",
-          color: "transparent",
-          backgroundSize: "400% 100%",
-        }}
-        animate={{ backgroundPosition: ["0% 50%", "100% 50%"] }}
-        transition={{
-          duration: 10,
-          repeat: Infinity,
-          repeatType: "reverse",
-          ease: "linear",
-        }}
-      >
-        About Me
-      </motion.h2>
+  return (
+    <SectionWrapper
+      id="resume"
+      className={`min-h-screen flex flex-col justify-center ${
+        isDarkMode ? "text-white" : "text-[#06071f]"
+      }`}
+    >
+      <div className="max-w-4xl mx-auto px-4 py-20">
+        {/* Animated Gradient Title */}
+        <motion.h2
+          className="text-4xl md:text-5xl font-bold mb-5 mt-20 text-center"
+          style={{
+            backgroundImage: `linear-gradient(90deg, ${COLORS.join(", ")})`,
+            WebkitBackgroundClip: "text",
+            backgroundClip: "text",
+            color: "transparent",
+            backgroundSize: "400% 100%",
+          }}
+          animate={{
+            backgroundPosition: ["0% 50%", "100% 50%"],
+          }}
+          transition={{
+            duration: 10,
+            repeat: Infinity,
+            repeatType: "reverse",
+            ease: "linear",
+          }}
+        >
+          About Me
+        </motion.h2>
 
-      <p
-        className={`text-lg sm:text-xl mb-8 ${
-          isDarkMode ? "text-gray-300" : "text-gray-700"
-        }`}
-      >
-        I’m a Computer Industrial Engineering student passionate about
-        full-stack development and DevOps.
-      </p>
+        <motion.div
+          className="h-1 w-24 mx-auto mt-2 mb-20"
+          style={{
+            background: `linear-gradient(90deg, ${COLORS.join(", ")})`,
+            backgroundSize: "400% 100%",
+          }}
+          animate={{
+            backgroundPosition: ["0% 50%", "100% 50%"],
+          }}
+          transition={{
+            duration: 10,
+            repeat: Infinity,
+            repeatType: "reverse",
+            ease: "linear",
+          }}
+        />
 
-      <div className="flex justify-center gap-6 flex-wrap">
-        <AnimatedButton
-          title="Technologies"
-          description="Explore my tools and stacks"
-          color={color}
-          isDarkMode={isDarkMode}
-          onClick={() => scrollToSection("technologies")}
-        />
-        <AnimatedButton
-          title="Projects"
-          description="Discover my real-world work"
-          color={color}
-          isDarkMode={isDarkMode}
-          onClick={() => scrollToSection("projects")}
-        />
-        <AnimatedButton
-          title="Study"
-          description="See my educational path"
-          color={color}
-          isDarkMode={isDarkMode}
-          onClick={() => scrollToSection("study")}
-        />
+        {/* Description */}
+        <p
+          className={`text-lg md:text-xl text-center mb-20 max-w-2xl mx-auto ${
+            isDarkMode ? "text-gray-300" : "text-gray-700"
+          }`}
+        >
+          I am a Computer Industrial Engineering student at ENET'COM with a
+          strong passion for software engineering. I specialize in web
+          development, desktop application development, and mobile app
+          development. My experience spans creating digital solutions across
+          industrial, administrative, cultural, and agricultural sectors. I’m
+          always exploring new technologies like DevOps and machine learning to
+          build smarter, scalable solutions.
+        </p>
+
+        {/* Three Rectangles */}
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+          <AnimatedButton
+            title="Technologies"
+            description="Tools I master and the tech I explore — from front-end frameworks to DevOps pipelines."
+            color={color}
+            onClick={() => scrollToSection("technologies")}
+            isDarkMode={isDarkMode}
+          />
+
+          <AnimatedButton
+            title="Projects"
+            description="Real-world challenges turned into digital solutions across industries — take a look!"
+            color={color}
+            onClick={() => scrollToSection("projects")}
+            isDarkMode={isDarkMode}
+          />
+
+          <AnimatedButton
+            title="Study"
+            description="Here’s how my education powers my code."
+            color={color}
+            onClick={() => scrollToSection("study")}
+            isDarkMode={isDarkMode}
+          />
+        </div>
       </div>
-    </div>
-  </SectionWrapper>
-);
-
+    </SectionWrapper>
+  );
 }
 
 // 🟣 Animated Button (with dark/light adaptation)

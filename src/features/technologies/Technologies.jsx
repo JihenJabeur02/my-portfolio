@@ -58,22 +58,26 @@ export default function Technologies() {
     );
   }
 
-return (
-  <SectionWrapper
-    id="technologies"
-    variant="full"
-    className={`${isDarkMode ? "text-white" : "text-[#06071f]"}`}
-  >
-    <div className="text-center max-w-5xl">
+  return (
+    <SectionWrapper
+      id="technologies"
+      className={`min-h-screen ${
+        isDarkMode ? "text-white" : "text-[#06071f]"
+      }`}
+    >
+      {/* Title */}
       <motion.h2
-        className="text-4xl md:text-5xl font-bold mb-8"
+        className="text-4xl md:text-5xl font-bold text-center mb-4 mt-20"
         style={{
           backgroundImage: `linear-gradient(90deg, ${COLORS.join(", ")})`,
           WebkitBackgroundClip: "text",
+          backgroundClip: "text",
           color: "transparent",
           backgroundSize: "400% 100%",
         }}
-        animate={{ backgroundPosition: ["0% 50%", "100% 50%"] }}
+        animate={{
+          backgroundPosition: ["0% 50%", "100% 50%"],
+        }}
         transition={{
           duration: 10,
           repeat: Infinity,
@@ -84,20 +88,23 @@ return (
         Technologies
       </motion.h2>
 
-      <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-6 justify-items-center">
-        {technologies.map((tech, i) => (
+      {/* Technologies Grid */}
+      <div
+        className={`grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-10 max-w-6xl mt-20 mx-auto ${
+          isDarkMode ? "text-white" : "text-[#06071f]"
+        }`}
+      >
+        {technologies.map((tech, index) => (
           <TechnologyBox
-            key={i}
+            key={index}
             tech={tech}
             color={color}
             isDarkMode={isDarkMode}
           />
         ))}
       </div>
-    </div>
-  </SectionWrapper>
-);
-
+    </SectionWrapper>
+  );
 }
 
 // 🟣 Technology Card Box
