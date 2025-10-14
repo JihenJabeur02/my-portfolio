@@ -58,7 +58,7 @@ export default function Hero() {
       <CircularImage color={color} />
     </div>
 
-    <div className="mb-10">
+    <div className="mb-6">
       <h1 className="text-4xl sm:text-5xl md:text-6xl font-bold mb-4">
         Hi, I'm Jihen Jabeur
       </h1>
