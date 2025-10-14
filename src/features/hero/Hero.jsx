@@ -59,7 +59,7 @@ export default function Hero() {
       )}
 
       {/* Hero content */}
-      <div className="relative z-10 flex flex-col items-center text-center px-4 py-25">
+      <div className="relative z-10 flex flex-col items-center text-center px-2 py-25">
         {/* Profile image */}
         <div className="relative w-full flex justify-center mb-10">
           <CircularImage color={color} />
