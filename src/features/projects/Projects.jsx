@@ -67,68 +67,69 @@ export default function Projects() {
   }, [color]);
 
 return (
-  <SectionWrapper
-    id="projects"
-    variant="full"
-    className={`${isDarkMode ? "text-white" : "text-[#06071f]"}`}
-  >
-    <div className="text-center max-w-6xl">
-      <motion.h2
-        className="text-4xl md:text-5xl font-bold mb-8"
-        style={{
-          backgroundImage: `linear-gradient(90deg, ${COLORS.join(", ")})`,
-          WebkitBackgroundClip: "text",
-          color: "transparent",
-          backgroundSize: "400% 100%",
-        }}
-        animate={{ backgroundPosition: ["0% 50%", "100% 50%"] }}
-        transition={{
-          duration: 10,
-          repeat: Infinity,
-          repeatType: "reverse",
-          ease: "linear",
-        }}
-      >
-        Projects
-      </motion.h2>
+<SectionWrapper
+  id="projects"
+  variant="full"
+  className={`${isDarkMode ? "text-white" : "text-[#06071f]"}`}
+>
+  <div className="text-center max-w-6xl w-full">
+    <motion.h2
+      className="text-4xl md:text-5xl font-bold mb-10"
+      style={{
+        backgroundImage: `linear-gradient(90deg, ${COLORS.join(", ")})`,
+        WebkitBackgroundClip: "text",
+        color: "transparent",
+      }}
+      animate={{ backgroundPosition: ["0% 50%", "100% 50%"] }}
+      transition={{
+        duration: 10,
+        repeat: Infinity,
+        repeatType: "reverse",
+        ease: "linear",
+      }}
+    >
+      About My Projects
+    </motion.h2>
 
-      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6 justify-items-center">
-        {projects.map((project) => (
-          <motion.div
-            key={project.id}
-            whileHover={{ scale: 1.05 }}
-            className={`p-6 rounded-xl border text-center transition-all duration-300 ${
-              isDarkMode
-                ? "bg-[#121826] border-gray-700"
-                : "bg-white border-gray-300"
+    {/* scrollable grid only if overflow */}
+    <div className="grid md:grid-cols-3 sm:grid-cols-2 gap-6 justify-items-center max-h-[calc(100vh-260px)] overflow-y-auto">
+      {projects.map((project) => (
+        <motion.div
+          key={project.id}
+          whileHover={{ scale: 1.05 }}
+          className={`p-6 rounded-xl border text-center transition-all ${
+            isDarkMode
+              ? "bg-[#121826] border-gray-700"
+              : "bg-white border-gray-300"
+          }`}
+        >
+          <div className="text-5xl mb-3">{project.icon}</div>
+          <h3 className="font-bold text-lg mb-2">{project.title}</h3>
+          <p
+            className={`text-sm mb-4 ${
+              isDarkMode ? "text-gray-400" : "text-gray-600"
             }`}
           >
-            <div className="text-5xl mb-3">{project.icon}</div>
-            <h3 className="font-bold text-lg mb-2">{project.title}</h3>
-            <p
-              className={`text-sm mb-3 ${
-                isDarkMode ? "text-gray-400" : "text-gray-600"
-              }`}
-            >
-              {project.shortDesc}
-            </p>
-            <a
-              href={project.pdfLink}
-              target="_blank"
-              rel="noopener noreferrer"
-              className={`px-3 py-1.5 rounded-full text-white font-medium ${
-                isDarkMode
-                  ? "bg-pink-500 hover:bg-pink-600"
-                  : "bg-[#06071f] hover:bg-[#1a1d2f]"
-              }`}
-            >
-              View More
-            </a>
-          </motion.div>
-        ))}
-      </div>
+            {project.shortDesc}
+          </p>
+          <a
+            href={project.pdfLink}
+            target="_blank"
+            rel="noopener noreferrer"
+            className={`px-3 py-1.5 rounded-full text-white font-medium ${
+              isDarkMode
+                ? "bg-pink-500 hover:bg-pink-600"
+                : "bg-[#06071f] hover:bg-[#1a1d2f]"
+            }`}
+          >
+            Learn More &gt;
+          </a>
+        </motion.div>
+      ))}
     </div>
-  </SectionWrapper>
+  </div>
+</SectionWrapper>
+
 );
 
 }
