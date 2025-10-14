@@ -40,7 +40,7 @@ export default function Hero() {
   return (
     <SectionWrapper
       id="home"
-      className="relative grid place-content-center overflow-hidden"
+      className="relative grid place-content-center overflow-hidden h-screen "
       variant="static"
     >
       {/* Dynamic gradient background */}
