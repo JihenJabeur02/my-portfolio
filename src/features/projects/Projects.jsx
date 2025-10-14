@@ -87,7 +87,7 @@ export default function Projects() {
       <div className="max-w-6xl mx-auto h-full flex flex-col">
         {/* Animated Gradient Title */}
         <motion.h2
-          className="text-4xl md:text-5xl font-bold mb-16 mt-10 text-center"
+          className="text-4xl md:text-5xl font-bold mb-14 mt-8 text-center"
           style={{
             backgroundImage: `linear-gradient(90deg, ${COLORS.join(", ")})`,
             WebkitBackgroundClip: "text",
