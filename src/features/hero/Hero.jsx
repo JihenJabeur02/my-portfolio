@@ -40,7 +40,7 @@ export default function Hero() {
   return (
 <SectionWrapper
   id="home"
-  className="relative flex flex-col items-center justify-center overflow-hidden h-screen pt-22 sm:pt-20"
+  className="relative flex flex-col items-center justify-center overflow-hidden h-screen pt-32 sm:pt-28"
   variant="static"
 >
   <motion.div className="absolute inset-0 z-0" style={{ background: updateBackground }} />
