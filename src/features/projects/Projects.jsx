@@ -4,7 +4,6 @@ import { useEffect, useState } from "react";
 import { useTheme } from "../../context/ThemeContext";
 import SectionWrapper from "../../components/common/SectionWrapper";
 
-// Example project data (replace pdfLink with your real Drive links)
 const projects = [
   {
     id: 1,
@@ -19,7 +18,7 @@ const projects = [
     id: 2,
     title: "Industrial Product Monitoring Platform",
     shortDesc:
-      "Real-time platform to visualize industrial machine performance, track parameters remotely, and support predictive maintenance for improved efficiency.",
+      "Real-time platform to visualize industrial machine performance, track parameters remotely, and support predictive maintenance.",
     icon: "📚",
     pdfLink:
       "https://drive.google.com/file/d/12muWD0Y9abJ6YENT-qPXLxisbkq-2sdY/view?usp=sharing",
@@ -28,7 +27,7 @@ const projects = [
     id: 3,
     title: "Smart Product Exchange Platform",
     shortDesc:
-      "Developed a smart web platform with IoT integration to enable real-time product exchange and autonomous transportation between industries.",
+      "Developed a smart web platform with IoT integration to enable real-time product exchange and autonomous transportation.",
     icon: "🤖",
     pdfLink:
       "https://drive.google.com/file/d/1E4GeiEDDJR4mOMBl3x6eoFhH918Dl-_A/view?usp=sharing",
@@ -36,7 +35,7 @@ const projects = [
   {
     id: 4,
     title:
-      "Design of an Automated Tool for Transforming AndiSDK Protocol Decoder Tests into PcapPlusPlus Scripts",
+      "Automated Tool for Transforming AndiSDK Protocol Decoder Tests into PcapPlusPlus Scripts",
     shortDesc: "",
     icon: "🌐",
     pdfLink:
@@ -44,15 +43,13 @@ const projects = [
   },
 ];
 
-// Animated colors for gradient title
 const COLORS = ["#13FFAA", "#1E67C6", "#CE84CF", "#DD335C"];
 
 export default function Projects() {
-  const { isDarkMode } = useTheme(); // 👈 global theme hook
+  const { isDarkMode } = useTheme();
   const [animationError, setAnimationError] = useState(false);
   const color = useMotionValue(COLORS[0]);
 
-  // Gradient animation
   useEffect(() => {
     let animation;
     try {
@@ -66,32 +63,21 @@ export default function Projects() {
       console.error("Animation error:", error);
       setAnimationError(true);
     }
-    return () => {
-      if (animation) animation.stop();
-    };
+    return () => animation?.stop();
   }, [color]);
 
-  if (animationError) {
-    return (
-      <SectionWrapper id="projects">
-        <h2 className="text-4xl font-bold text-center">Projects</h2>
-        <p className="text-center mt-4">
-          Animation unavailable - content loading...
-        </p>
-      </SectionWrapper>
-    );
-  }
-
   return (
-    <SectionWrapper id="projects" className="flex flex-col">
-      <div className="max-w-6xl mx-auto h-full flex flex-col">
-        {/* Animated Gradient Title */}
+    <SectionWrapper
+      id="projects"
+      variant="full"
+      className={`${isDarkMode ? "text-white" : "text-[#06071f]"}`}
+    >
+      <div className="max-w-6xl mx-auto w-full">
         <motion.h2
-          className="text-4xl md:text-5xl font-bold mb-16 mt-10 text-center"
+          className="text-4xl md:text-5xl font-bold mb-12 text-center"
           style={{
             backgroundImage: `linear-gradient(90deg, ${COLORS.join(", ")})`,
             WebkitBackgroundClip: "text",
-            backgroundClip: "text",
             color: "transparent",
             backgroundSize: "400% 100%",
           }}
@@ -108,7 +94,6 @@ export default function Projects() {
           About My Projects
         </motion.h2>
 
-        {/* Projects Grid */}
         <div
           className={`grid md:grid-cols-3 sm:grid-cols-2 grid-cols-1 gap-8 ${
             isDarkMode ? "text-white" : "text-[#06071f]"
@@ -118,12 +103,11 @@ export default function Projects() {
             <motion.div
               key={project.id}
               whileHover={{ scale: 1.05 }}
-              className={`rounded-xl shadow-lg p-6 flex flex-col items-center text-center border transition-all duration-300
-                ${
-                  isDarkMode
-                    ? "bg-[#121826] border-gray-700"
-                    : "bg-white border-gray-200"
-                }`}
+              className={`rounded-xl shadow-lg p-6 flex flex-col items-center text-center border transition-all duration-300 ${
+                isDarkMode
+                  ? "bg-[#121826] border-gray-700"
+                  : "bg-white border-gray-200"
+              }`}
             >
               <div className="text-6xl mb-4">{project.icon}</div>
               <h3 className="text-xl font-bold mb-2">{project.title}</h3>
@@ -135,7 +119,6 @@ export default function Projects() {
                 {project.shortDesc}
               </p>
 
-              {/* Button */}
               <a
                 href={project.pdfLink}
                 target="_blank"

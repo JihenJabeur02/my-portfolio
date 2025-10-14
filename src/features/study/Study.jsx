@@ -1,7 +1,8 @@
 // src/features/study/Study.jsx
 import { motion, useMotionValue, animate } from "framer-motion";
 import { useEffect, useState } from "react";
-import { useTheme } from "../../context/ThemeContext"; // ✅ use your global theme
+import { useTheme } from "../../context/ThemeContext";
+import SectionWrapper from "../../components/common/SectionWrapper";
 
 const COLORS = ["#13FFAA", "#1E67C6", "#CE84CF", "#DD335C"];
 
@@ -31,11 +32,10 @@ const studies = [
 ];
 
 export default function Study() {
-  const { isDarkMode } = useTheme(); // ✅ global dark/light toggle
+  const { isDarkMode } = useTheme();
   const [animationError, setAnimationError] = useState(false);
   const color = useMotionValue(COLORS[0]);
 
-  // Animate the gradient colors
   useEffect(() => {
     let animation;
     try {
@@ -49,40 +49,22 @@ export default function Study() {
       console.error("Animation error:", error);
       setAnimationError(true);
     }
-
     return () => animation?.stop();
   }, [color]);
 
-  if (animationError) {
-    return (
-      <section id="study" className="min-h-screen text-white p-8 bg-[#0e141f]">
-        <h2 className="text-4xl font-bold text-center">About My Study</h2>
-        <p className="text-center mt-4 text-gray-500">
-          Animation unavailable - content loading...
-        </p>
-      </section>
-    );
-  }
-
   return (
-    <section
+    <SectionWrapper
       id="study"
-      className={`min-h-screen w-screen px-6 py-20 transition-colors duration-500 ${
-        isDarkMode ? "text-white" : "text-[#06071f]"
-      }`}
-      style={{
-        backgroundColor: isDarkMode ? "#0e141f" : "#ffffff", // ✅ keep background logic here
-        overflowX: "hidden", // ✅ prevent horizontal scroll
-      }}
+      variant="full"
+      className={`${isDarkMode ? "text-white" : "text-[#06071f]"}`}
     >
-      <div className="max-w-5xl mx-auto flex flex-col justify-start">
-        {/* Animated Title */}
+      <div className="max-w-5xl mx-auto w-full">
+        {/* Title */}
         <motion.h2
-          className="text-4xl md:text-5xl font-bold mb-16 mt-10 text-center"
+          className="text-4xl md:text-5xl font-bold mb-12 text-center"
           style={{
             backgroundImage: `linear-gradient(90deg, ${COLORS.join(", ")})`,
             WebkitBackgroundClip: "text",
-            backgroundClip: "text",
             color: "transparent",
             backgroundSize: "400% 100%",
           }}
@@ -99,8 +81,8 @@ export default function Study() {
           About My Study
         </motion.h2>
 
-        {/* Education timeline */}
-        <div className="flex flex-col gap-10">
+        {/* Timeline */}
+        <div className="flex flex-col gap-8">
           {studies.map((item, idx) => (
             <motion.div
               key={idx}
@@ -108,7 +90,7 @@ export default function Study() {
               whileInView={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8, delay: idx * 0.2 }}
               viewport={{ once: true }}
-              className={`flex flex-col md:flex-row justify-between items-start md:items-center border-b pb-6 ${
+              className={`flex flex-col md:flex-row justify-between items-start md:items-center border-b pb-4 ${
                 isDarkMode ? "border-gray-700" : "border-gray-300"
               }`}
             >
@@ -133,6 +115,6 @@ export default function Study() {
           ))}
         </div>
       </div>
-    </section>
+    </SectionWrapper>
   );
 }
