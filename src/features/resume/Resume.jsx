@@ -53,7 +53,7 @@ export default function Resume() {
         isDarkMode ? "text-white" : "text-[#06071f]"
       }`}
     >
-      <div className="max-w-4xl mx-auto px-4 py-20">
+      <div className="max-w-4xl mx-auto px-4 py-10">
         {/* Animated Gradient Title */}
         <motion.h2
           className="text-4xl md:text-5xl font-bold mb-5 mt-20 text-center"
@@ -78,7 +78,7 @@ export default function Resume() {
         </motion.h2>
 
         <motion.div
-          className="h-1 w-24 mx-auto mt-2 mb-20"
+          className="h-1 w-24 mx-auto mt-2 mb-10"
           style={{
             background: `linear-gradient(90deg, ${COLORS.join(", ")})`,
             backgroundSize: "400% 100%",
