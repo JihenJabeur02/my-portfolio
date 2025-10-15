@@ -100,13 +100,15 @@ export default function Resume() {
             isDarkMode ? "text-gray-300" : "text-gray-700"
           }`}
         >
-          I am a Computer Industrial Engineering student at ENET'COM with a
-          strong passion for software engineering. I specialize in web
-          development, desktop application development, and mobile app
-          development. My experience spans creating digital solutions across
-          industrial, administrative, cultural, and agricultural sectors. I’m
-          always exploring new technologies like DevOps and machine learning to
-          build smarter, scalable solutions.
+          I am an Industrial Engineering student at ENET'COM with a strong passion 
+          for software engineering and process optimization. I started by developing web,
+           desktop, and mobile applications to enhance industrial and administrative performance.
+            Later, I specialized in creating automation scripts and testing tools, diving deeper
+             into validation and quality assurance. Currently, I am expanding my skills toward 
+             embedded systems and exploring the integration of AI technologies to develop smarter,
+              adaptive industrial solutions. Throughout my projects, I have honed strong teamwork
+               and time management abilities, and I regularly work with DevOps tools to ensure efficient
+                development, deployment, and collaboration.
         </p>
 
         {/* Three Rectangles */}

@@ -52,7 +52,7 @@ export default function Hero() {
         </motion.div>
 
         <h1 className="text-5xl font-bold mb-4">Hi, I’m Jihen Jabeur</h1>
-        <p className="text-lg mb-8">Full-Stack Developer | DevOps-Minded</p>
+        <p className="text-lg mb-8">Software Developer | DevOps-Minded</p>
 
         <motion.button
           onClick={() =>
