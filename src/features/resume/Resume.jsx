@@ -96,7 +96,7 @@ export default function Resume() {
 
         {/* Description */}
         <p
-          className={`text-lg md:text-xl text-center mb-20 max-w-2xl mx-auto ${
+          className={`text-lg md:text-xl text-center mb-15 max-w-2xl mx-auto ${
             isDarkMode ? "text-gray-250" : "text-gray-650"
           }`}
         >
