@@ -97,7 +97,7 @@ export default function Resume() {
         {/* Description */}
         <p
           className={`text-lg md:text-xl text-center mb-20 max-w-2xl mx-auto ${
-            isDarkMode ? "text-gray-300" : "text-gray-700"
+            isDarkMode ? "text-gray-250" : "text-gray-650"
           }`}
         >
           I am an Industrial Engineering student at ENET'COM with a strong passion 
