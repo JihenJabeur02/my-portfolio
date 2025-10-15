@@ -11,6 +11,7 @@ import jsImg from "../../assets/images/javascript.png";
 import pythonImg from "../../assets/images/python.png";
 import reactImg from "../../assets/images/react.png";
 import nodeImg from "../../assets/images/node.png";
+import docker from "../../assets/images/docker.png";
 
 const COLORS = ["#13FFAA", "#1E67C6", "#CE84CF", "#DD335C"];
 
@@ -22,6 +23,7 @@ const technologies = [
   { name: "Python", rate: 80, image: pythonImg },
   { name: "React", rate: 70, image: reactImg },
   { name: "Node.js", rate: 60, image: nodeImg },
+  { name: "Docker", rate: 60, image: docker },
 ];
 
 export default function Technologies() {
